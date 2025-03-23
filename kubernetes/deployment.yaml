@@ -1,5 +1,3 @@
-# We should use a "Deployment" instead of a "Pod" for a longer-running (idle) service. 
-# see deployment.yaml instead 
 apiVersion: v1
 kind: Pod
 metadata:
@@ -9,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: shiny
-    image: ghcr.io/boettiger-lab/inat-ranges
+    image: ghcr.io/boettiger-lab/nautilus-shiny
     imagePullPolicy: Always
     env:
     - name: AWS_ACCESS_KEY_ID

@@ -1,5 +1,5 @@
 
-kubectl delete pod inat-pod -n biodiversity
-kubectl delete svc inat-svc -n biodiversity
-kubectl delete ingress inat-ingress -n biodiversity
+kubectl delete deployment shiny-deployment -n biodiversity
+kubectl delete svc shiny-svc -n biodiversity
+kubectl delete ingress shiny-ingress -n biodiversity
 

@@ -1,35 +1,29 @@
-apiVersion: v1
-kind: Pod
+# Rewrite as deployment https://nationalresearchplatform.org/documentation/userdocs/running/long-idle/
+
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: inat-pod
+  name: shiny-deployment
   labels:
-    k8s-app: inat-app
+    k8s-app: shiny-app
 spec:
-  containers:
-  - name: shiny
-    image: ghcr.io/boettiger-lab/nautilus-shiny
-    imagePullPolicy: Always
-    env:
-    - name: AWS_ACCESS_KEY_ID
-      valueFrom:
-        secretKeyRef:
-          name: aws-access-key-id
-          key: AWS_ACCESS_KEY_ID  
-    - name: AWS_SECRET_ACCESS_KEY
-      valueFrom:
-        secretKeyRef:
-          name: aws-secret-access-key
-          key: AWS_SECRET_ACCESS_KEY
-    - name: AWS_S3_ENDPOINT
-      value: "rook-ceph-rgw-nautiluss3.rook"
-    - name: AWS_PUBLIC_ENDPOINT
-      value: "s3-west.nrp-nautilus.io"
-    - name: AWS_HTTPS
-      value: "false"
-    resources:
-      requests:
-        cpu: 4
-        memory: 4Gi
-      limits:
-        cpu: 4
-        memory: 4Gi
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: shiny-app
+  template:
+    metadata:
+      labels:
+        k8s-app: shiny-app
+    spec:
+      containers:
+      - name: shiny
+        image:  ghcr.io/boettiger-lab/nautilus-shiny
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 2Gi
+          limits:
+            cpu: 100m
+            memory: 2Gi

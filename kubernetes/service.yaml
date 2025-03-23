@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: inat-svc
+  name: shiny-svc
   labels:
-    k8s-app: inat-svc
+    k8s-app: shiny-svc
 
 # ports.targetPort is the port exposed by the Docker container
 # ports.port is the port matched to the ingress
@@ -13,5 +13,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    k8s-app: inat-app
+    k8s-app: shiny-app
   type: ClusterIP

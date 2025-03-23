@@ -3,19 +3,20 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: haproxy
-  name: inat-ingress
+  name: shiny-ingress
 spec:
   rules:
-  - host: inat-ranges.nrp-nautilus.io
+    # Set the same URL for both host and tls.hosts.  include your namespace to avoid collisions?
+  - host: shiny.biodiversity.nrp-nautilus.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: inat-svc
+            name: shiny-svc
             port:
               number: 8080
   tls:
   - hosts:
-    - inat-ranges.nrp-nautilus.io
+    - shiny.biodiversity.nrp-nautilus.io

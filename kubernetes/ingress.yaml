@@ -1,12 +1,19 @@
+## Ensure A record exists first!
+## (Or implement DNS record manager)
+
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: shiny-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+  labels:
+    app: shiny-deployment
 spec:
-  ingressClassName: haproxy
+  ingressClassName: traefik
   rules:
-    # Set the same URL for both host and tls.hosts.  include your namespace to avoid collisions?
-  - host: shiny-biodiversity.nrp-nautilus.io
+  - host: data.thelio.carlboettiger.info
     http:
       paths:
       - path: /
@@ -18,4 +25,6 @@ spec:
               number: 8080
   tls:
   - hosts:
-    - shiny-biodiversity.nrp-nautilus.io
+    - data.thelio.carlboettiger.info
+    secretName: shiny-tls
+

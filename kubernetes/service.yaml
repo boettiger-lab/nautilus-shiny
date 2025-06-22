@@ -4,6 +4,10 @@ metadata:
   name: shiny-svc
   labels:
     k8s-app: shiny-svc
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: shiny-thelio.carlboettiger.info
+    external-dns.alpha.kubernetes.io/ttl: "120" #optional
+
 
 # ports.targetPort is the port exposed by the Docker container
 # ports.port is the port matched to the ingress
